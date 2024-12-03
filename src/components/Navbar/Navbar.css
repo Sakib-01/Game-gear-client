@@ -1,0 +1,52 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.menu a {
+  color: #4c1d95;
+  font-weight: 500;
+  font-size: 1.2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover State */
+.menu a:hover {
+  color: #ffffff;
+  background-color: #1d4ed8;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+}
+
+/* Active State */
+.menu a.active {
+  color: #ffffff;
+  text-decoration: underline;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Dropdown Styles */
+.navbar .dropdown-content {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.navbar .dropdown-content a {
+  color: #4b5563;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar .dropdown-content a:hover {
+  color: #ffffff;
+  background-color: #1d4ed8;
+  font-size: 1.05rem;
+}
