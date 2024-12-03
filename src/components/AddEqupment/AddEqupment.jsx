@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Toaster } from "react-hot-toast";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const AddEquipment = () => {
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -76,6 +80,7 @@ const AddEquipment = () => {
                 id="name"
                 className="input input-bordered w-full"
                 placeholder="Enter name "
+                defaultValue={user?.displayName}
                 required
               />
             </div>
@@ -90,6 +95,7 @@ const AddEquipment = () => {
                 id="email"
                 className="input input-bordered w-full"
                 placeholder="Enter email "
+                defaultValue={user?.email}
                 required
               />
             </div>

@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  const { createUser } = useContext(AuthContext);
+  const { createUser, setUser } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -17,9 +17,10 @@ const Signup = () => {
     const userdata = { name, photo, email, password };
     console.log(userdata);
 
-    createUser(email, password)
+    createUser(name, photo, email, password)
       .then((result) => {
         console.log("user created at fb", result.user);
+        setUser(result);
 
         const newUser = { name, photo, email };
         // save new user info to the database
@@ -47,6 +48,7 @@ const Signup = () => {
         console.log("error", error);
       });
   };
+
   return (
     <div
       onSubmit={handleSubmit}

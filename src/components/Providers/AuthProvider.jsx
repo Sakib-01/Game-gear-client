@@ -3,6 +3,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import Auth from "../AuthLayout/Auth";
@@ -13,9 +14,28 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const createUser = (name, photoURL, email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        return updateProfile(user, {
+          displayName: name,
+          photoURL: photoURL,
+        })
+          .then(() => {
+            return user;
+          })
+          .catch((error) => {
+            throw new Error("Error updating profile: " + error.message);
+          });
+      })
+      .catch((error) => {
+        throw new Error("Error creating user: " + error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const login = (email, password) => {
