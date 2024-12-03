@@ -8,6 +8,9 @@ import Home from "./components/Home/Home.jsx";
 import AddEqupment from "./components/AddEqupment/AddEqupment.jsx";
 import AllEquipments from "./components/AllEquipments/AllEquipments.jsx";
 import EquipmentDetails from "./components/EquipmentDetails/EquipmentDetails.jsx";
+import Auth from "./components/AuthLayout/Auth.jsx";
+import Signup from "./components/Signup/Signup.jsx";
+import AuthProvider from "./components/Providers/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,10 +31,22 @@ const router = createBrowserRouter([
     element: <EquipmentDetails></EquipmentDetails>,
     loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`),
   },
+  {
+    path: "/auth",
+    element: <Auth />,
+    children: [
+      {
+        path: "/auth/signup",
+        element: <Signup></Signup>,
+      },
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
