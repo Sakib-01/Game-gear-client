@@ -20,7 +20,7 @@ const Navbar = () => {
 
       <NavLink
         className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
-        // to="/myprofile"
+        to="/allequipments"
       >
         All Sports Equipment
       </NavLink>
