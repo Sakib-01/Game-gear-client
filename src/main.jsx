@@ -12,6 +12,7 @@ import Auth from "./components/AuthLayout/Auth.jsx";
 import Signup from "./components/Signup/Signup.jsx";
 import AuthProvider from "./components/Providers/AuthProvider.jsx";
 import Login from "./components/Login/Login.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/equipmentdetails/:id",
-    element: <EquipmentDetails></EquipmentDetails>,
+    element: (
+      <PrivateRoute>
+        <EquipmentDetails></EquipmentDetails>
+      </PrivateRoute>
+    ),
     loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`),
   },
   {
