@@ -1,18 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const { createUser } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const newUser = { name, photo, email, password };
-    console.log(newUser);
+    const userdata = { name, photo, email, password };
+    console.log(userdata);
+
+    createUser(email, password)
+      .then((result) => {
+        console.log("user created at fb", result.user);
+
+        const newUser = { name, photo, email };
+        // save new user info to the database
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              console.log("user created in db");
+              Swal.fire({
+                title: "Success!",
+                text: "Account create successfully",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
+            }
+          });
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
   return (
     <div
