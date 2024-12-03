@@ -1,10 +1,13 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import Navbar from "../Navbar/Navbar";
+import Swal from "sweetalert2";
 
 const AddEquipment = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
     const image = e.target.image.value;
     const itemName = e.target.itemName.value;
     const categoryName = e.target.categoryName.value;
@@ -15,6 +18,8 @@ const AddEquipment = () => {
     const processingTime = e.target.processingTime.value;
     const stockStatus = e.target.stockStatus.value;
     const newEquipment = {
+      name,
+      email,
       image,
       itemName,
       categoryName,
@@ -26,13 +31,33 @@ const AddEquipment = () => {
       stockStatus,
     };
     console.log(newEquipment);
+
+    fetch("http://localhost:5000/sports", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newEquipment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          console.log("successfully added");
+          Swal.fire({
+            title: "Success!",
+            text: "Equipment added successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          e.target.reset();
+        }
+      });
   };
 
   return (
     <div>
       <Navbar />
       <div className="flex flex-col items-center py-10 px-4 lg:px-0">
-        <Toaster position="top-center" reverseOrder={false} />
         <h1 className="text-3xl lg:text-4xl font-bold mb-6">
           Add New Equipment
         </h1>
@@ -41,6 +66,33 @@ const AddEquipment = () => {
           className="w-full max-w-3xl bg-base-100 shadow-xl rounded-lg p-8"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="form-control">
+              <label htmlFor="name" className="label">
+                <span className="label-text">name </span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                className="input input-bordered w-full"
+                placeholder="Enter name "
+                required
+              />
+            </div>
+
+            <div className="form-control">
+              <label htmlFor="email" className="label">
+                <span className="label-text">email </span>
+              </label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                className="input input-bordered w-full"
+                placeholder="Enter email "
+                required
+              />
+            </div>
             {/* Image URL */}
             <div className="form-control">
               <label htmlFor="image" className="label">
