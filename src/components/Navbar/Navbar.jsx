@@ -22,7 +22,13 @@ const Navbar = () => {
         className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
         // to="/myprofile"
       >
-        My profile
+        All Sports Equipment
+      </NavLink>
+      <NavLink
+        className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
+        to="/addequipment"
+      >
+        Add Equpment
       </NavLink>
     </>
   );
