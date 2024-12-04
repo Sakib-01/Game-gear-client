@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useContext } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
@@ -10,9 +10,13 @@ import AllEquipments from "./components/AllEquipments/AllEquipments.jsx";
 import EquipmentDetails from "./components/EquipmentDetails/EquipmentDetails.jsx";
 import Auth from "./components/AuthLayout/Auth.jsx";
 import Signup from "./components/Signup/Signup.jsx";
-import AuthProvider from "./components/Providers/AuthProvider.jsx";
+import AuthProvider, {
+  AuthContext,
+} from "./components/Providers/AuthProvider.jsx";
 import Login from "./components/Login/Login.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
+import MyEquipment from "./components/MyEquipments/MyEquipment.jsx";
+import Update from "./components/Update/Update.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +42,15 @@ const router = createBrowserRouter([
     loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`),
   },
   {
+    path: "/updateEquipment/:id",
+    element: (
+      <PrivateRoute>
+        <Update></Update>
+      </PrivateRoute>
+    ),
+    loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`),
+  },
+  {
     path: "/auth",
     element: <Auth />,
     children: [
@@ -50,6 +63,15 @@ const router = createBrowserRouter([
         element: <Signup></Signup>,
       },
     ],
+  },
+
+  {
+    path: "/myequipment",
+    element: (
+      <PrivateRoute>
+        <MyEquipment></MyEquipment>
+      </PrivateRoute>
+    ),
   },
 ]);
 
