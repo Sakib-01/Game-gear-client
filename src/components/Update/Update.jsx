@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import Navbar from "../Navbar/Navbar";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const Update = () => {
   const { user } = useContext(AuthContext);
   const product = useLoaderData();
+  const navigate = useNavigate();
   console.log(product);
 
   console.log(user);
@@ -38,8 +39,8 @@ const Update = () => {
     };
     console.log(newEquipment);
 
-    fetch("http://localhost:5000/sports", {
-      method: "POST",
+    fetch(`http://localhost:5000/sports/${product._id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -47,15 +48,21 @@ const Update = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           console.log("successfully added");
           Swal.fire({
             title: "Success!",
-            text: "Equipment added successfully",
+            text: "Equipment updated successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
           e.target.reset();
+
+          if (window.history.length > 1) {
+            navigate(-1); // Go back if history exists
+          } else {
+            navigate("/"); // Fallback to homepage or a safe route
+          }
         }
       });
   };
@@ -173,54 +180,6 @@ const Update = () => {
               />
             </div>
 
-            {/* Category Name */}
-            {/* <div className="form-control">
-              <label htmlFor="categoryName" className="label">
-                <span className="label-text">Category Name</span>
-              </label>
-              <input
-                type="text"
-                name="categoryName"
-                id="categoryName"
-                className="input input-bordered w-full"
-                defaultValue={product?.categoryName}
-                placeholder="Enter category name"
-                required
-              />
-            </div> */}
-
-            {/* Description */}
-            {/* <div className="form-control">
-              <label htmlFor="description" className="label">
-                <span className="label-text">Description</span>
-              </label>
-              <textarea
-                name="description"
-                id="description"
-                rows="4"
-                className="textarea textarea-bordered w-full"
-                defaultValue={product?.description}
-                placeholder="Enter a description"
-                required
-              ></textarea>
-            </div> */}
-
-            {/* Price */}
-            {/* <div className="form-control">
-              <label htmlFor="price" className="label">
-                <span className="label-text">Price</span>
-              </label>
-              <input
-                type="number"
-                name="price"
-                id="price"
-                className="input input-bordered w-full"
-                defaultValue={product?.price}
-                placeholder="Enter price"
-                required
-              />
-            </div> */}
-
             {/* Rating */}
             <div className="form-control">
               <label htmlFor="rating" className="label">
@@ -290,7 +249,7 @@ const Update = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn btn-primary w-full mt-6">
+          <button className="btn btn-primary w-full mt-6">
             Update Equipment
           </button>
         </form>
