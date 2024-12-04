@@ -1,8 +1,9 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 const EquipmentDetails = () => {
+  const navigate = useNavigate();
   const product = useLoaderData();
   const {
     image,
@@ -69,6 +70,9 @@ const EquipmentDetails = () => {
                   {stockStatus > 0 ? "In Stock" : "Out of Stock"}
                 </p>
               </div>
+              <button onClick={() => navigate(-1)} className="btn btn-primary">
+                Back
+              </button>
             </div>
           </div>
         </div>
