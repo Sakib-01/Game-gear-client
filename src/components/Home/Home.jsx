@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import Banner from "../Banner/Banner";
 import EquipmentCart from "../EquipmentCart/EquipmentCart";
@@ -9,10 +9,13 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Banner />
-      <Category />
-      <EquipmentCart />
-      <Brands />
+
+      <div className="bg-white dark:bg-slate-900 min-h-screen font-inter ">
+        <Banner />
+        <Category />
+        <EquipmentCart />
+        <Brands />
+      </div>
     </div>
   );
 };

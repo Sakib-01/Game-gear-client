@@ -17,6 +17,7 @@ import Login from "./components/Login/Login.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import MyEquipment from "./components/MyEquipments/MyEquipment.jsx";
 import Update from "./components/Update/Update.jsx";
+import { ThemeProvider } from "./components/Providers/Theme.jsx";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +79,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </AuthProvider>
   </StrictMode>
 );

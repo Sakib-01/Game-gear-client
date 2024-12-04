@@ -17,7 +17,7 @@ const Category = () => {
   }, []);
   return (
     <Fade cascade damping={0.1}>
-      <div className="w-10/12 mx-auto  ">
+      <div className="w-10/12 mx-auto bg-white dark:bg-slate-900 ">
         <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center  my-10 text-blue-500">
           Categories{" "}
           <span className="underline underline-offset-4 decoration-1 font-light text-green-600">

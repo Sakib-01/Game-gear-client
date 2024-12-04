@@ -59,7 +59,7 @@ const AddEquipment = () => {
   };
 
   return (
-    <div>
+    <div className="bg-white dark:bg-slate-900">
       <Navbar />
       <div className="flex flex-col items-center py-10 px-4 lg:px-0">
         <h1 className="text-3xl lg:text-4xl font-bold mb-6">

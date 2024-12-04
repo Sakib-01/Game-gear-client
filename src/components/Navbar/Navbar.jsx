@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { AuthContext } from "../Providers/AuthProvider";
+import { useTheme } from "../Providers/Theme";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
+  const { theme, handleThemeSwitch } = useTheme();
+
   const links = (
     <>
       <NavLink
@@ -21,17 +23,19 @@ const Navbar = () => {
       >
         All Sports Equipment
       </NavLink>
+
       <NavLink
         className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
         to="/addequipment"
       >
-        Add Equpment
+        Add Equipment
       </NavLink>
+
       <NavLink
         className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
         to="/myequipment"
       >
-        My Equpment
+        My Equipment
       </NavLink>
 
       <NavLink
@@ -42,9 +46,10 @@ const Navbar = () => {
       </NavLink>
     </>
   );
+
   return (
-    <div className="navbar bg-base-100  py-5 ">
-      <div className="navbar w-10/12 mx-auto  ">
+    <div className="navbar py-5">
+      <div className="navbar w-10/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -77,7 +82,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <button onClick={logout} className="btn btn-primary ">
+            <button onClick={logout} className="btn btn-primary">
               logout
             </button>
           ) : (
@@ -85,6 +90,14 @@ const Navbar = () => {
               <button>login</button>
             </Link>
           )}
+
+          <button
+            type="button"
+            onClick={handleThemeSwitch}
+            className="fixed z-10 right-2 top-2 bg-indigo-500 text-lg p-1 rounded-md"
+          >
+            {theme === "dark" ? "🌙" : "🌞"}
+          </button>
         </div>
       </div>
     </div>
