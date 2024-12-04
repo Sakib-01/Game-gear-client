@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import { AuthContext } from "../Providers/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const MyEquipment = () => {
   const { user } = useContext(AuthContext);
@@ -17,6 +18,40 @@ const MyEquipment = () => {
         .catch((err) => console.error("Error fetching data:", err));
     }
   }, [user?.email]);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete from the database
+        fetch(`http://localhost:5000/sports/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+
+              const remainingProducts = products.filter(
+                (prod) => prod._id !== id
+              );
+              setProducts(remainingProducts);
+            }
+          });
+      }
+    });
+  };
   return (
     <div>
       <Navbar></Navbar>
@@ -79,9 +114,11 @@ const MyEquipment = () => {
                       <FaEdit />
                     </button>
                   </Link>
-                  <Link to={`/equipmentdetails/${product._id}`}>
+                  <Link
+                  //   to={`/deleteEquipment/${product._id}`}
+                  >
                     <button
-                      //   onClick={() => handleDetails(product._id)}
+                      onClick={() => handleDelete(product._id)}
                       className="btn btn-ghost btn-lg"
                     >
                       <MdDeleteForever />
