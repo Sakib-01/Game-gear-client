@@ -3,6 +3,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import Navbar from "../Navbar/Navbar";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const Update = () => {
   const { user } = useContext(AuthContext);
@@ -259,6 +260,7 @@ const Update = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

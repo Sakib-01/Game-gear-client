@@ -4,6 +4,7 @@ import Banner from "../Banner/Banner";
 import EquipmentCart from "../EquipmentCart/EquipmentCart";
 import Category from "../Category/Category";
 import Brands from "../Brands/Brands";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <Category />
         <EquipmentCart />
         <Brands />
+        <Footer />
       </div>
     </div>
   );

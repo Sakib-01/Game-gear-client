@@ -5,6 +5,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import Footer from "../Footer/Footer";
 
 const MyEquipment = () => {
   const { user } = useContext(AuthContext);
@@ -143,6 +144,7 @@ const MyEquipment = () => {
           </table>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

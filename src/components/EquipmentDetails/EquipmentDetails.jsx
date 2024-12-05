@@ -1,6 +1,7 @@
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 const EquipmentDetails = () => {
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ const EquipmentDetails = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

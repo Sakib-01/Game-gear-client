@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Link, useLoaderData } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const AllEquipments = () => {
-  const products = useLoaderData();
+  // const product = useLoaderData();
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/sports")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
-  const handleDetails = (id) => {
-    console.log(id);
+  const handleSort = () => {
+    const sortProduct = [...products].sort((a, b) => a.price - b.price);
+    console.log(sortProduct);
+    setProducts(sortProduct);
   };
   return (
     <div>
       <Navbar></Navbar>
       <div className="bg-white dark:bg-slate-900">
         <div className="overflow-x-auto w-10/12 mx-auto">
+          <button onClick={handleSort} className="btn btn-primary">
+            Sort By Price
+          </button>
           <table className="table">
             {/* head */}
             <thead>
@@ -80,6 +92,7 @@ const AllEquipments = () => {
           </table>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

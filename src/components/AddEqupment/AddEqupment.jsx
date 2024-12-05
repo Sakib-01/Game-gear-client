@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
+import Footer from "../Footer/Footer";
 
 const AddEquipment = () => {
   const { user } = useContext(AuthContext);
@@ -246,6 +247,7 @@ const AddEquipment = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
