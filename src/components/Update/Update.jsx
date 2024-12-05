@@ -40,13 +40,16 @@ const Update = () => {
     };
     console.log(newEquipment);
 
-    fetch(`http://localhost:5000/sports/${product._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newEquipment),
-    })
+    fetch(
+      `https://assignment-10-server-theta-nine.vercel.app/sports/${product._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newEquipment),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -92,7 +95,7 @@ const Update = () => {
                   className="input input-bordered w-full"
                   placeholder="Enter name"
                   defaultValue={user?.displayName}
-                  // readOnly
+                  readOnly
                   required
                 />
               </div>

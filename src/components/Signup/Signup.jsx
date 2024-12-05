@@ -41,7 +41,7 @@ const Signup = () => {
         setUser(result.user);
 
         const newUser = { name, photo, email };
-        fetch("http://localhost:5000/users", {
+        fetch("https://assignment-10-server-theta-nine.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const Signup = () => {
         };
 
         // Save user information in MongoDB
-        fetch("http://localhost:5000/users", {
+        fetch("https://assignment-10-server-theta-nine.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -13,7 +13,9 @@ const MyEquipment = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/mysports?email=${user.email}`)
+      fetch(
+        `https://assignment-10-server-theta-nine.vercel.app/mysports?email=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => setProducts(data))
         .catch((err) => console.error("Error fetching data:", err));
@@ -32,9 +34,12 @@ const MyEquipment = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // delete from the database
-        fetch(`http://localhost:5000/sports/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://assignment-10-server-theta-nine.vercel.app/sports/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {

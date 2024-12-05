@@ -11,9 +11,9 @@ import Supreme from "../../assets/Supreme-Logo.png";
 const Brands = () => {
   return (
     <div>
-      <h1 className="text-2xl sm:text-4xl font-bold my-2 text-center">
+      <h1 className="text-2xl sm:text-4xl font-bold my-2 text-center text-blue-600">
         Our{" "}
-        <span className="underline underline-offset-4 decoration-1 font-light">
+        <span className="underline underline-offset-4 decoration-1 font-light text-green-600">
           Sister Concern
         </span>
       </h1>{" "}

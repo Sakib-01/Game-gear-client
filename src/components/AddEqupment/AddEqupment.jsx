@@ -37,7 +37,7 @@ const AddEquipment = () => {
     };
     console.log(newEquipment);
 
-    fetch("http://localhost:5000/sports", {
+    fetch("https://assignment-10-server-theta-nine.vercel.app/sports", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -36,7 +36,7 @@ const router = createBrowserRouter([
   {
     path: "/allequipments",
     element: <AllEquipments></AllEquipments>,
-    // loader: () => fetch("http://localhost:5000/sports"),
+    // loader: () => fetch("https://assignment-10-server-theta-nine.vercel.app/sports"),
   },
   {
     path: "/equipmentdetails/:id",
@@ -45,7 +45,10 @@ const router = createBrowserRouter([
         <EquipmentDetails></EquipmentDetails>
       </PrivateRoute>
     ),
-    loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`),
+    loader: ({ params }) =>
+      fetch(
+        `https://assignment-10-server-theta-nine.vercel.app/sports/${params.id}`
+      ),
   },
   {
     path: "/updateEquipment/:id",
@@ -54,7 +57,10 @@ const router = createBrowserRouter([
         <Update></Update>
       </PrivateRoute>
     ),
-    loader: ({ params }) => fetch(`http://localhost:5000/sports/${params.id}`),
+    loader: ({ params }) =>
+      fetch(
+        `https://assignment-10-server-theta-nine.vercel.app/sports/${params.id}`
+      ),
   },
   {
     path: "/auth",
