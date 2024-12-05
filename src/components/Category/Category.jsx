@@ -27,11 +27,8 @@ const Category = () => {
 
         <div className="grid grid-cols-3 md:grid-cols-5 gap-5 my-5">
           {categories.map((category, index) => (
-            <Zoom>
-              <div
-                className="px-2 py-2 md:px-10 md:py-5 rounded-3xl border-2 border-blue-400  text-center font-bold text-xl text-green-600"
-                key={index}
-              >
+            <Zoom key={index}>
+              <div className="px-2 py-2 md:px-10 md:py-5 rounded-3xl border-2 border-blue-400  text-center font-bold text-xl text-green-600">
                 {category}
               </div>
             </Zoom>

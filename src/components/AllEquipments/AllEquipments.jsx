@@ -11,7 +11,7 @@ const AllEquipments = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="bg-white text-black dark:bg-slate-900">
+      <div className="bg-white dark:bg-slate-900">
         <div className="overflow-x-auto w-10/12 mx-auto">
           <table className="table">
             {/* head */}

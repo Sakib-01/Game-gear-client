@@ -38,12 +38,16 @@ const Navbar = () => {
         My Equipment
       </NavLink>
 
-      <NavLink
-        className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
-        to="/auth/signup"
-      >
-        Sign up
-      </NavLink>
+      {user ? (
+        ""
+      ) : (
+        <NavLink
+          className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
+          to="/auth/signup"
+        >
+          Sign up
+        </NavLink>
+      )}
     </>
   );
 
@@ -87,7 +91,7 @@ const Navbar = () => {
             </button>
           ) : (
             <Link to="/auth">
-              <button>login</button>
+              <button className=" btn btn-primary ">login</button>
             </Link>
           )}
 

@@ -3,6 +3,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 const Login = () => {
   const { login, setUser } = useContext(AuthContext);
@@ -35,6 +37,54 @@ const Login = () => {
           confirmButtonText: "Try Again",
         })
       );
+  };
+
+  const handleGoogleSignin = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const newUser = {
+          name: user.displayName,
+          photo: user.photoURL,
+          email: user.email,
+        };
+
+        // Save user information in MongoDB
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId || data.exists) {
+              console.log("User saved in MongoDB");
+              Swal.fire({
+                title: "Success!",
+                text: "Signed in with Google successfully",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
+              setUser(user);
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.log("Error saving user to MongoDB:", error);
+          });
+      })
+      .catch((error) => {
+        console.log("Error:", error.message);
+        Swal.fire({
+          title: "Error",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
   };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-indigo-100 to-white">
@@ -93,7 +143,7 @@ const Login = () => {
         <div className="divider my-4">OR</div>
         <div className="form-control mt-4">
           <button
-            // onClick={handleGoogleSignin}
+            onClick={handleGoogleSignin}
             className="btn w-full rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold py-2"
           >
             Sign in with Google

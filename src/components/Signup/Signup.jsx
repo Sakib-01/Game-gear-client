@@ -1,51 +1,122 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  const { createUser, setUser } = useContext(AuthContext);
+  const { createUser, setUser, googleLogin } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+
     const userdata = { name, photo, email, password };
     console.log(userdata);
 
+    if (
+      !/[A-Z]/.test(password) ||
+      !/[a-z]/.test(password) ||
+      password.length < 6
+    ) {
+      Swal.fire({
+        title: "Error",
+        text: "Password must be at least 6 characters long and include both uppercase and lowercase letters.",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
+
     createUser(name, photo, email, password)
       .then((result) => {
-        console.log("user created at fb", result.user);
-        setUser(result);
+        console.log("User created at Firebase", result.user);
+        setUser(result.user);
 
         const newUser = { name, photo, email };
-        // save new user info to the database
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(newUser),
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.insertedId) {
-              console.log("user created in db");
               Swal.fire({
                 title: "Success!",
-                text: "Account create successfully",
+                text: "Account created successfully",
                 icon: "success",
                 confirmButtonText: "Ok",
               });
+              navigate("/"); // Redirect to home or another page
             }
           });
       })
       .catch((error) => {
-        console.log("error", error);
+        console.log("Error:", error.message);
+        Swal.fire({
+          title: "Error",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
+  };
+
+  const handleGoogleSignin = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const newUser = {
+          name: user.displayName,
+          photo: user.photoURL,
+          email: user.email,
+        };
+
+        // Save user information in MongoDB
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              console.log("User saved in MongoDB");
+              Swal.fire({
+                title: "Success!",
+                text: "Signed in with Google successfully",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
+              setUser(user);
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.log("Error saving user to MongoDB:", error);
+          });
+      })
+      .catch((error) => {
+        console.log("Error:", error.message);
+        Swal.fire({
+          title: "Error",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
       });
   };
 
@@ -110,7 +181,7 @@ const Signup = () => {
               Register
             </button>
             <button
-              //   onClick={handleGoogleSignin}
+              onClick={handleGoogleSignin}
               type="button"
               className="btn bg-white text-gray-800 w-full flex items-center justify-center border border-gray-300 rounded-md hover:bg-gray-100 transition"
             >
