@@ -74,30 +74,32 @@ const AddEquipment = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="form-control">
                 <label htmlFor="name" className="label">
-                  <span className="label-text">name </span>
+                  <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
                   name="name"
                   id="name"
-                  className="input input-bordered w-full"
-                  placeholder="Enter name "
+                  className="input input-bordered w-full cursor-not-allowed"
+                  placeholder="Enter name"
                   defaultValue={user?.displayName}
+                  readOnly
                   required
                 />
               </div>
 
               <div className="form-control">
                 <label htmlFor="email" className="label">
-                  <span className="label-text">email </span>
+                  <span className="label-text">Email</span>
                 </label>
                 <input
                   type="text"
                   name="email"
                   id="email"
-                  className="input input-bordered w-full"
-                  placeholder="Enter email "
+                  className="input input-bordered w-full cursor-not-allowed"
+                  placeholder="Enter email"
                   defaultValue={user?.email}
+                  readOnly
                   required
                 />
               </div>

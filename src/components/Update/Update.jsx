@@ -92,7 +92,7 @@ const Update = () => {
                   type="text"
                   name="name"
                   id="name"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full cursor-not-allowed"
                   placeholder="Enter name"
                   defaultValue={user?.displayName}
                   readOnly
@@ -108,7 +108,7 @@ const Update = () => {
                   type="text"
                   name="email"
                   id="email"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full cursor-not-allowed"
                   placeholder="Enter email"
                   defaultValue={user?.email}
                   readOnly
