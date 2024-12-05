@@ -18,6 +18,7 @@ import PrivateRoute from "./routes/PrivateRoute.jsx";
 import MyEquipment from "./components/MyEquipments/MyEquipment.jsx";
 import Update from "./components/Update/Update.jsx";
 import { ThemeProvider } from "./components/Providers/Theme.jsx";
+import Error from "./components/Error.jsx";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,11 @@ const router = createBrowserRouter([
         <MyEquipment></MyEquipment>
       </PrivateRoute>
     ),
+  },
+
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);
 

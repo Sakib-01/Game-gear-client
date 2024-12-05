@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useTheme } from "../Providers/Theme";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { theme, handleThemeSwitch } = useTheme();
+  console.log(user);
 
   const links = (
     <>
@@ -86,9 +88,31 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <button onClick={logout} className="btn btn-primary">
-              logout
-            </button>
+            <div className="flex justify-center items-center gap-2">
+              <div className="w-10 h-10 rounded-full overflow-hidden ">
+                <img
+                  alt="User Profile"
+                  src={user?.photoURL}
+                  className="w-full h-full object-cover "
+                  // title={user.displayName}
+                  data-tooltip-id="userTooltip"
+                  data-tooltip-content={user?.displayName || "User"}
+                />
+                <ReactTooltip
+                  id="userTooltip"
+                  place="left"
+                  style={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    borderRadius: "4px",
+                    padding: "5px",
+                  }}
+                />
+              </div>
+              <button onClick={logout} className="btn btn-primary">
+                logout
+              </button>
+            </div>
           ) : (
             <Link to="/auth">
               <button className=" btn btn-primary ">login</button>

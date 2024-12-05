@@ -111,7 +111,6 @@ const AddEquipment = () => {
                   id="image"
                   className="input input-bordered w-full"
                   placeholder="Enter image URL"
-                  defaultValue={user?.photoURL ? user.photoURL : ""}
                   required
                 />
               </div>
