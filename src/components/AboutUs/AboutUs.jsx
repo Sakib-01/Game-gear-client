@@ -1,5 +1,6 @@
 import React from "react";
 import sale from "../../assets/sale.png";
+import { Zoom } from "react-awesome-reveal";
 
 const AboutUs = () => {
   return (
@@ -10,17 +11,19 @@ const AboutUs = () => {
           Us
         </span>
       </h1>{" "}
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-14">
         <div className=" space-y-5 ">
-          <p className="text-left text-lg text-green-400">
-            We are sportsequipment
-          </p>
+          <Zoom>
+            <p className="text-left text-lg text-green-400">We are Game Gear</p>
+          </Zoom>
           <h2 className="text-left text-blue-600 text-3xl">
             A Leading sports Equipment store in Bangladesh
           </h2>
-          <h4 className="text-left text-gray-500 dark:text-green-500 text-2xl">
-            SINCE 2020!
-          </h4>
+          <Zoom>
+            <h4 className="text-left text-gray-500 dark:text-green-500 text-2xl">
+              SINCE 2020!
+            </h4>
+          </Zoom>
           <p className="text-left text-gray-800 dark:text-blue-500 text-lg">
             our focus has always been-and will continue to be-delivering a
             quality experience with our equipment. We understand that our
@@ -28,9 +31,11 @@ const AboutUs = () => {
             own longterm fitness goals.
           </p>
 
-          <h4 className="text-left text-gray-500 dark:text-green-500 text-2xl">
-            OUR STRENGTH, OUR PARTNERS
-          </h4>
+          <Zoom>
+            <h4 className="text-left text-gray-500 dark:text-green-500 text-2xl">
+              OUR STRENGTH, OUR PARTNERS
+            </h4>
+          </Zoom>
 
           <p className="text-left text-gray-800 dark:text-blue-500 text-lg">
             A wide variety of fitness goods and equipment from around to globe
@@ -38,7 +43,9 @@ const AboutUs = () => {
           </p>
         </div>
         <div className="flex flex-col justify-center items-center">
-          <img className="w-96 " src={sale} alt="" />
+          <Zoom>
+            <img className="w-96 " src={sale} alt="" />
+          </Zoom>
           <h2 className="text-gray-500 dark:text-green-500 text-2xl md:pl-20">
             Sign Up For Great Promos And Inside Deals!
           </h2>

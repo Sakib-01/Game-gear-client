@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import gameGear from "../../assets/logo.webp";
 
 const Footer = () => {
   return (
@@ -7,7 +8,8 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Website Name */}
         <div className="flex flex-col items-center md:items-start">
-          <h2 className="text-2xl font-bold text-white mb-2">EquiSports</h2>
+          <img className="w-20" src={gameGear} alt="" />
+          <h2 className="text-2xl font-bold text-white mb-2">Game Gear</h2>
           <p className="text-sm">
             Your go-to place for the best sports accessories.
           </p>
@@ -16,7 +18,7 @@ const Footer = () => {
         {/* Contact Info */}
         <div className="flex flex-col items-center md:items-start">
           <h3 className="text-lg font-semibold text-white mb-2">Contact Us</h3>
-          <p>Email: equipment@sports.com</p>
+          <p>Email: gamegear@sports.com</p>
           <p>Phone: +880123456789</p>
           <p>Address: 123 Sports , Bangladesh</p>
         </div>
@@ -68,7 +70,7 @@ const Footer = () => {
       {/* Copyright Section */}
       <div className="mt-6 border-t border-gray-700 pt-4 text-center">
         <p className="text-sm">
-          &copy; 2024 EquipmentSports. All Rights Reserved.
+          &copy; 2024 GameGearSports. All Rights Reserved.
         </p>
       </div>
     </footer>

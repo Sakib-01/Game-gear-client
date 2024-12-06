@@ -25,7 +25,7 @@ const EquipmentCart = () => {
           {products.map((product) => (
             <div
               key={product._id}
-              className="card bg-base-100 shadow-xl  h-[550px]"
+              className="card bg-gradient-to-br from-blue-500  to-green-400 text-white shadow-xl  h-[550px]"
             >
               <Zoom>
                 <figure>
@@ -36,14 +36,14 @@ const EquipmentCart = () => {
                   />
                 </figure>
               </Zoom>
-              <div className="card-body h-[200px]">
+              <div className="card-body h-[200px] ">
                 <h2 className="card-title">
                   {product.itemName}
                   <div className="flex items-center justify-between">
                     <p
                       className={`text-lg font-medium bg ${
                         product.stockStatus > 0
-                          ? "text-green-600 bg-green-900 p-2 rounded-3xl"
+                          ? "text-blue-300 bg-green-900 p-2 rounded-3xl"
                           : "text-red-600 bg-red-900 p-2 rounded-3xl"
                       }`}
                     >
@@ -59,7 +59,7 @@ const EquipmentCart = () => {
                   <div className="text-xl font-bold">
                     {product.categoryName}{" "}
                   </div>
-                  <div className="text-xl font-bold text-yellow-500">
+                  <div className="text-xl font-bold text-yellow-300">
                     {product.rating} ★
                   </div>
                 </div>

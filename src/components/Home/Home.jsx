@@ -8,6 +8,9 @@ import Footer from "../Footer/Footer";
 import AboutUs from "../AboutUs/AboutUs";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Home | Game Gear ";
+  }, []);
   return (
     <div>
       <Navbar />

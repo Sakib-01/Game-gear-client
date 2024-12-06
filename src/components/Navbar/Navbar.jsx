@@ -4,6 +4,7 @@ import "./Navbar.css";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useTheme } from "../Providers/Theme";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import gameGear from "../../assets/logo.webp";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -55,7 +56,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar py-5">
-      <div className="navbar w-10/12 mx-auto">
+      <div className="navbar w-11/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -81,7 +82,8 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Sports collection</a>
+          <img className="w-12" src={gameGear} alt="" />
+          <a className="btn btn-ghost text-xl hidden md:block ">Game Gear</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>

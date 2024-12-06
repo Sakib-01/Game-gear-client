@@ -20,6 +20,7 @@ const MyEquipment = () => {
         .then((data) => setProducts(data))
         .catch((err) => console.error("Error fetching data:", err));
     }
+    document.title = "My Equipment | Game Gear ";
   }, [user?.email]);
 
   const handleDelete = (id) => {

@@ -10,6 +10,8 @@ const AllEquipments = () => {
     fetch("https://assignment-10-server-theta-nine.vercel.app/sports")
       .then((res) => res.json())
       .then((data) => setProducts(data));
+
+    document.title = "All Equipment | Game Gear ";
   }, []);
 
   const handleSort = () => {
@@ -20,14 +22,14 @@ const AllEquipments = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="bg-white dark:bg-slate-900">
+      <div className="bg-white text-black dark:bg-slate-900  dark:text-slate-300">
         <div className="overflow-x-auto w-10/12 mx-auto">
           <button onClick={handleSort} className="btn btn-primary">
             Sort By Price
           </button>
-          <table className="table">
+          <table className="table ">
             {/* head */}
-            <thead>
+            <thead className="text-black dark:text-slate-300">
               <tr>
                 <th>Item Name</th>
                 <th>Description</th>

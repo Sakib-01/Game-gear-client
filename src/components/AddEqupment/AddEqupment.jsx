@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import Navbar from "../Navbar/Navbar";
 import Swal from "sweetalert2";
@@ -7,6 +7,10 @@ import Footer from "../Footer/Footer";
 
 const AddEquipment = () => {
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    document.title = "Add Equipment | Game Gear ";
+  }, []);
 
   console.log(user);
   const handleFormSubmit = (e) => {

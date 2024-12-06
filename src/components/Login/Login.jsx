@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -12,6 +12,10 @@ const Login = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Login | Game Gear ";
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
