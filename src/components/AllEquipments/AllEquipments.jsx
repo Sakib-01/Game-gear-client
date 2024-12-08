@@ -7,7 +7,7 @@ const AllEquipments = () => {
   // const product = useLoaderData();
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("https://assignment-10-server-theta-nine.vercel.app/sports")
+    fetch("https://assignment-10-server-theta-nine.vercel.app/allsports")
       .then((res) => res.json())
       .then((data) => setProducts(data));
 
