@@ -21,7 +21,7 @@ const EquipmentCart = () => {
       </h1>
 
       <Fade cascade damping={0.1}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-5 my-10 rounded-3xl  ">
+        <div className=" w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-5 my-10 rounded-3xl  ">
           {products.map((product) => (
             <div
               key={product._id}
