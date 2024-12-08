@@ -4,7 +4,7 @@ import { Fade, Zoom } from "react-awesome-reveal";
 const Category = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch("https://assignment-10-server-theta-nine.vercel.app/sports")
+    fetch("https://assignment-10-server-theta-nine.vercel.app/allsports")
       .then((res) => res.json())
       .then((data) => {
         const uniqueCategories = [

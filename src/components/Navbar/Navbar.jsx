@@ -55,7 +55,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar py-5">
+    <div className="navbar py-5 bg-white dark:bg-slate-900">
       <div className="navbar w-11/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -83,7 +83,9 @@ const Navbar = () => {
             </ul>
           </div>
           <img className="w-12" src={gameGear} alt="" />
-          <a className="btn btn-ghost text-xl hidden md:block ">Game Gear</a>
+          <a className=" text-blue-500 font-bold ml-3 text-xl hidden md:block ">
+            Game Gear
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>

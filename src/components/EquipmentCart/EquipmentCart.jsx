@@ -69,6 +69,9 @@ const EquipmentCart = () => {
               </div>
             </div>
           ))}
+          <Link to="/allequipments">
+            <button className=" btn btn-primary"> Show All</button>
+          </Link>
         </div>
       </Fade>
     </div>
