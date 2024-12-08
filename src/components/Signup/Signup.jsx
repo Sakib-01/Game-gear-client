@@ -41,7 +41,7 @@ const Signup = () => {
     createUser(name, photo, email, password)
       .then((result) => {
         console.log("User created at Firebase", result.user);
-        setUser(result.user);
+        // setUser(result.user);
 
         const newUser = { name, photo, email };
         fetch("https://assignment-10-server-theta-nine.vercel.app/users", {

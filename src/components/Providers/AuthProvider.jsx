@@ -14,28 +14,37 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (name, photoURL, email, password) => {
+  const createUser = async (name, photoURL, email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+    try {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
         const user = userCredential.user;
-        return updateProfile(user, {
-          displayName: name,
-          photoURL: photoURL,
-        })
-          .then(() => {
-            return user;
-          })
-          .catch((error) => {
-            throw new Error("Error updating profile: " + error.message);
+        try {
+          await updateProfile(user, {
+            displayName: name,
+            photoURL: photoURL,
           });
-      })
-      .catch((error) => {
-        throw new Error("Error creating user: " + error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+
+          setUser({
+            ...user,
+            displayName: name,
+            photoURL: photoURL,
+          });
+          return user;
+        } catch (error) {
+          throw new Error("Error updating profile: " + error.message);
+        }
+      } catch (error_1) {
+        throw new Error("Error creating user: " + error_1.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const login = (email, password) => {
