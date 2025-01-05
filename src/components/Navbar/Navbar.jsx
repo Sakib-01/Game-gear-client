@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useTheme } from "../Providers/Theme";
@@ -9,7 +9,27 @@ import gameGear from "../../assets/logo.webp";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { theme, handleThemeSwitch } = useTheme();
-  console.log(user);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLinkClick = (e, target) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      // If already on the homepage, scroll to the target section
+      scrollToSection(target);
+    } else {
+      // Navigate to the homepage and scroll to the target section
+      navigate("/", { replace: true });
+      setTimeout(() => scrollToSection(target), 100);
+    }
+  };
 
   const links = (
     <>
@@ -19,47 +39,62 @@ const Navbar = () => {
       >
         Home
       </NavLink>
-
       <NavLink
         className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
         to="/allequipments"
       >
         All Sports Equipment
       </NavLink>
-
-      <NavLink
-        className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
-        to="/addequipment"
+      <Link
+        className="mr-2 hover:underline"
+        to="/"
+        onClick={(e) => handleLinkClick(e, "about-us")}
       >
-        Add Equipment
-      </NavLink>
-
-      <NavLink
-        className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
-        to="/myequipment"
+        About Us
+      </Link>
+      <Link
+        className="mr-2 hover:underline"
+        to="/"
+        onClick={(e) => handleLinkClick(e, "brands")}
       >
-        My Equipment
-      </NavLink>
-
+        Brands
+      </Link>
       {user ? (
-        ""
+        <>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
+            to="/addequipment"
+          >
+            Add Equipment
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
+            to="/myequipment"
+          >
+            My Equipment
+          </NavLink>
+        </>
       ) : (
         <NavLink
           className={({ isActive }) => (isActive ? "active mr-2" : "mr-2")}
           to="/auth/signup"
         >
-          Sign up
+          Sign Up
         </NavLink>
       )}
     </>
   );
 
   return (
-    <div className="navbar py-5 bg-white dark:bg-slate-900">
+    <div className="navbar sticky top-0 py-5 bg-white dark:bg-slate-900 z-50">
       <div className="navbar w-11/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <button
+              tabIndex={0}
+              className="btn btn-ghost lg:hidden"
+              aria-label="Open menu"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -74,7 +109,7 @@ const Navbar = () => {
                   d="M4 6h16M4 12h8m-8 6h16"
                 />
               </svg>
-            </div>
+            </button>
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
@@ -82,23 +117,22 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <img className="w-12" src={gameGear} alt="" />
-          <a className=" text-blue-500 font-bold ml-3 text-xl hidden md:block ">
+          <img className="w-12" src={gameGear} alt="Game Gear" />
+          <span className="text-blue-500 font-bold ml-3 text-xl hidden md:block">
             Game Gear
-          </a>
+          </span>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex items-center gap-4">
           {user ? (
             <div className="flex justify-center items-center gap-2">
-              <div className="w-10 h-10 rounded-full overflow-hidden ">
+              <div className="w-10 h-10 rounded-full overflow-hidden">
                 <img
                   alt="User Profile"
                   src={user?.photoURL}
-                  className="w-full h-full object-cover "
-                  // title={user.displayName}
+                  className="w-full h-full object-cover"
                   data-tooltip-id="userTooltip"
                   data-tooltip-content={user?.displayName || "User"}
                 />
@@ -114,19 +148,18 @@ const Navbar = () => {
                 />
               </div>
               <button onClick={logout} className="btn btn-primary">
-                logout
+                Logout
               </button>
             </div>
           ) : (
             <Link to="/auth">
-              <button className=" btn btn-primary ">login</button>
+              <button className="btn btn-primary">Login</button>
             </Link>
           )}
-
           <button
             type="button"
             onClick={handleThemeSwitch}
-            className="fixed z-10 right-2 top-2 bg-indigo-500 text-lg p-1 rounded-md"
+            className="bg-indigo-500 text-white p-2 rounded-md"
           >
             {theme === "dark" ? "🌙" : "🌞"}
           </button>

@@ -19,12 +19,20 @@ import MyEquipment from "./components/MyEquipments/MyEquipment.jsx";
 import Update from "./components/Update/Update.jsx";
 import { ThemeProvider } from "./components/Providers/Theme.jsx";
 import Error from "./components/Error.jsx";
+import Brands from "./components/Brands/Brands.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
+    children: [
+      {
+        path: "brand",
+        element: <Brands></Brands>,
+      },
+    ],
   },
+
   {
     path: "/addequipment",
     element: (
@@ -40,11 +48,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/equipmentdetails/:id",
-    element: (
-      <PrivateRoute>
-        <EquipmentDetails></EquipmentDetails>
-      </PrivateRoute>
-    ),
+    element: <EquipmentDetails></EquipmentDetails>,
     loader: ({ params }) =>
       fetch(
         `https://assignment-10-server-theta-nine.vercel.app/sports/${params.id}`

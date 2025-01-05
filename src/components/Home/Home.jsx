@@ -19,8 +19,12 @@ const Home = () => {
         <Banner />
         <Category />
         <EquipmentCart />
-        <AboutUs />
-        <Brands />
+        <div id="about-us">
+          <AboutUs />
+        </div>
+        <div id="brands">
+          <Brands />
+        </div>
         <Footer />
       </div>
     </div>

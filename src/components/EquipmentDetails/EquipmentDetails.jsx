@@ -28,7 +28,7 @@ const EquipmentDetails = () => {
             <img
               src={image}
               alt={itemName}
-              className="max-w-full rounded-lg shadow-xl object-cover h-full"
+              className="max-w-full rounded-lg shadow-xl object-cover h-[450px]"
             />
           </div>
 
