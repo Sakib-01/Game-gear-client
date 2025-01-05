@@ -91,7 +91,14 @@ const Login = () => {
       });
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-indigo-100 to-white">
+    <div
+      className="flex justify-center items-center min-h-screen bg-cover
+    bg-center"
+      style={{
+        backgroundImage:
+          'url("https://img.freepik.com/premium-photo/top-view-blue-sports-equipment-generative-ai_893571-6088.jpg")',
+      }}
+    >
       <div className="bg-white w-full max-w-md mx-auto rounded-lg shadow-lg p-8">
         <h2 className="text-4xl font-bold text-center text-blue-700 mb-5">
           Login

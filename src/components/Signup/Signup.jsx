@@ -126,7 +126,11 @@ const Signup = () => {
   return (
     <div
       onSubmit={handleSubmit}
-      className="flex justify-center items-center min-h-screen bg-gradient-to-b from-indigo-100 to-white"
+      className="flex justify-center items-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage:
+          'url("https://kaleela.com/wp-content/uploads/2019/11/Arab-Sports-Vocabulary.jpg")',
+      }}
     >
       <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-2xl">
         <h2 className="text-3xl font-semibold text-center text-indigo-800 mb-6">
